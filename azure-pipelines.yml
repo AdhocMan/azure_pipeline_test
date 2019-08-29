@@ -21,3 +21,11 @@ steps:
     CXX=g++ cmake ..
     make -j4
   displayName: 'Build'
+
+- script: |
+    ./build/main
+  displayName: 'Run main'
+
+- script: |
+    ./build/main_fail
+  displayName: 'Run main_fail'

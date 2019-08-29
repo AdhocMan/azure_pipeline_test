@@ -23,9 +23,6 @@ steps:
   displayName: 'Build'
 
 - script: |
-    ./build/main
+    mpirun -n 2 ./build/main
   displayName: 'Run main'
 
-- script: |
-    ./build/main_fail
-  displayName: 'Run main_fail'

@@ -10,10 +10,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: sudo apt-get install g++
-  displayName: 'install g++'
+- script: |
+    sudo apt update
+    sudo apt install g++ cmake libfftw3-dev libfftw3-single3 libmpich-dev
+  displayName: 'Install dependencies'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    mkdir -p build
+    cd build
+    CXX=g++ cmake ..
+    make -j4
+  displayName: 'Build'

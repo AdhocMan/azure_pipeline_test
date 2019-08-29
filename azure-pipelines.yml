@@ -11,8 +11,8 @@ pool:
 
 steps:
 - script: |
-    sudo apt update
-    sudo apt install g++ cmake libfftw3-dev libfftw3-single3 libmpich-dev
+    sudo apt-cache update
+    sudo apt-get --yes --force-yes install g++ cmake libfftw3-dev libfftw3-single3 libmpich-dev
   displayName: 'Install dependencies'
 
 - script: |

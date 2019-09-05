@@ -21,6 +21,8 @@ steps:
 
 - script: g++ --version
 
+- script: cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l
+
 - script: |
     mkdir -p build
     cd build

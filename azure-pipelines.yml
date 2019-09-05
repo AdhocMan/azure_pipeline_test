@@ -36,7 +36,7 @@ jobs:
       mpirun -n 2 ./build/main
     displayName: 'Run main'
 
-jobs:
+
 - job: macOS
   pool:
     vmImage: 'macOS-latest'

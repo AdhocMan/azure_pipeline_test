@@ -44,5 +44,4 @@ jobs:
   steps:
   - script: printenv
 
-  steps:
   - script: xcode-select --install

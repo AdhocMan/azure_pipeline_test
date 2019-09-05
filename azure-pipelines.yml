@@ -12,9 +12,11 @@ pool:
 container: ubuntu:18.04
 
 steps:
+- script: printenv
+
 - script: |
-    sudo apt-cache update
-    sudo apt-get --yes --force-yes install g++ cmake libfftw3-dev libfftw3-single3 libmpich-dev
+    apt-cache update
+    apt-get --yes --force-yes install g++ cmake libfftw3-dev libfftw3-single3 libmpich-dev
   displayName: 'Install dependencies'
 
 - script: |

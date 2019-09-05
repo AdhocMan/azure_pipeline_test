@@ -7,7 +7,7 @@
 # - master
 
 jobs:
-- job: Ubuntu-GCC
+- job: Ubuntu_GCC
   pool:
     vmImage: 'ubuntu-latest'
 
@@ -45,7 +45,7 @@ jobs:
     displayName: 'Run main'
 
 
-- job: macOS-Clang
+- job: macOS_Clang
   pool:
     vmImage: 'macOS-10.14'
 

@@ -39,9 +39,19 @@ jobs:
 
 - job: macOS
   pool:
-    vmImage: 'macOS-latest'
+    vmImage: 'macOS-10.14'
 
   steps:
-  - script: printenv
+  - script: |
+      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    displayName: 'Install Homebrew'
 
-  - script: xcode-select --install
+  - script: |
+      brew install gcc
+      brew install cmake
+      brew install fftw
+    displayName: 'Install dependencies'
+
+  - script: g++ --version
+
+  - script: cmake --version

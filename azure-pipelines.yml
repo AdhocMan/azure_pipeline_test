@@ -36,7 +36,7 @@ jobs:
   - script: |
       mkdir -p build
       cd build
-    CXX=g++ cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+      CXX=g++ cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
       make -j4
     displayName: 'Build'
 

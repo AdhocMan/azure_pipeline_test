@@ -3,34 +3,46 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
+# trigger:
+# - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+jobs:
+- job: Ubuntu
+  pool:
+    vmImage: 'ubuntu-latest'
 
-steps:
-- script: printenv
+  steps:
+  - script: printenv
 
-- script: |
-    sudo apt-get update
-    sudo apt-get install g++ cmake libfftw3-dev libfftw3-single3 libmpich-dev
-  displayName: 'Install dependencies'
+  - script: |
+      sudo apt-get update
+      sudo apt-get install g++ cmake libfftw3-dev libfftw3-single3 libmpich-dev
+    displayName: 'Install dependencies'
 
-- script: cmake --version
+  - script: cmake --version
 
-- script: g++ --version
+  - script: g++ --version
 
-- script: cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l
+  - script: cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l
 
-- script: |
-    mkdir -p build
-    cd build
-    CXX=g++ cmake ..
-    make -j4
-  displayName: 'Build'
+  - script: |
+      mkdir -p build
+      cd build
+      CXX=g++ cmake ..
+      make -j4
+    displayName: 'Build'
 
-- script: |
-    mpirun -n 2 ./build/main
-  displayName: 'Run main'
+  - script: |
+      mpirun -n 2 ./build/main
+    displayName: 'Run main'
 
+jobs:
+- job: macOS
+  pool:
+    vmImage: 'macOS-latest'
+
+  steps:
+  - script: printenv
+
+  steps:
+  - script: xcode-select --install

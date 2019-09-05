@@ -7,9 +7,17 @@
 # - master
 
 jobs:
-- job: Ubuntu
+- job: Ubuntu-GCC
   pool:
     vmImage: 'ubuntu-latest'
+
+  strategy:
+    matrix:
+      Release:
+        BUILD_TYPE: 'RELEASE'
+      Debug:
+        BUILD_TYPE: 'DEBUG'
+    maxParallel: 2
 
   steps:
   - script: printenv
@@ -23,12 +31,12 @@ jobs:
 
   - script: g++ --version
 
-  - script: cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l
+  - script: echo "${BUILD_TYPE}"
 
   - script: |
       mkdir -p build
       cd build
-      CXX=g++ cmake ..
+    CXX=g++ cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
       make -j4
     displayName: 'Build'
 
@@ -37,7 +45,7 @@ jobs:
     displayName: 'Run main'
 
 
-- job: macOS
+- job: macOS-Clang
   pool:
     vmImage: 'macOS-10.14'
 
@@ -48,7 +56,7 @@ jobs:
 
   - script: |
       brew install llvm
-      brew install cmake
+      # brew install cmake # cmake alreay installed
       brew install fftw
       brew install open-mpi
     displayName: 'Install dependencies'

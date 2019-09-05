@@ -47,12 +47,12 @@ jobs:
     displayName: 'Install Homebrew'
 
   - script: |
-      brew install --with-toolchain llvm
+      brew install llvm
       brew install cmake
       brew install fftw
       brew install open-mpi
     displayName: 'Install dependencies'
 
-  - script: /usr/local/opt/llvm/bin/clang++ --version
+  - script: $(brew --prefix llvm)/bin/clang++ --version
 
   - script: cmake --version

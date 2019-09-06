@@ -13,10 +13,10 @@ jobs:
 
   container: adhocman/master:ubuntu_18_04_spfft
 
-  # strategy:
-  #   matrix:
-  #     Release:
-  #       BUILD_TYPE: 'RELEASE'
+  strategy:
+    matrix:
+      Release:
+        BUILD_TYPE: 'RELEASE'
   #     Debug:
   #       BUILD_TYPE: 'DEBUG'
   #   maxParallel: 2
@@ -39,12 +39,12 @@ jobs:
 
   - script: echo ${BUILD_TYPE}
 
-  # - script: |
-  #     mkdir -p build
-  #     cd build
-  #     CXX=g++ cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
-  #     make -j4
-  #   displayName: 'Build'
+  - script: |
+      mkdir -p build
+      cd build
+      /opt/cmake-3.9.0/bin/cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+      make -j4
+    displayName: 'Build'
 
   # - script: |
   #     mpirun -n 2 ./build/main

@@ -18,9 +18,11 @@ jobs:
       Release:
         BUILD_TYPE: 'RELEASE'
         CMAKE_EXEC: '/opt/cmake-3.9.0/bin/cmake'
+        run_test: true
       Debug:
         BUILD_TYPE: 'DEBUG'
         CMAKE_EXEC: '/opt/cmake-3.11.0/bin/cmake'
+        run_test: false
     maxParallel: 2
 
   steps:
@@ -40,6 +42,7 @@ jobs:
   - script: g++ --version
 
   - script: echo ${BUILD_TYPE}
+    condition: and(succeeded(), eq('${{ run_test }}', 'true'))
 
   - script: |
       mkdir -p build

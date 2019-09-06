@@ -17,9 +17,11 @@ jobs:
     matrix:
       Release:
         BUILD_TYPE: 'RELEASE'
-  #     Debug:
-  #       BUILD_TYPE: 'DEBUG'
-  #   maxParallel: 2
+        CMAKE_EXEC: '/opt/cmake-3.9.0/bin/cmake'
+      Debug:
+        BUILD_TYPE: 'DEBUG'
+        CMAKE_EXEC: '/opt/cmake-3.11.0/bin/cmake'
+    maxParallel: 2
 
   steps:
   - script: printenv
@@ -42,7 +44,7 @@ jobs:
   - script: |
       mkdir -p build
       cd build
-      CUDACXX=/usr/local/cuda-9.0/bin/nvcc /opt/cmake-3.9.0/bin/cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+      CUDACXX=/usr/local/cuda-9.0/bin/nvcc $CMAKE_EXEC .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
       make -j4
     displayName: 'Build'
 

@@ -42,7 +42,7 @@ jobs:
   - script: |
       mkdir -p build
       cd build
-      /opt/cmake-3.9.0/bin/cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+      CUDACXX=/usr/local/cuda-9.0/bin/nvcc /opt/cmake-3.9.0/bin/cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
       make -j4
     displayName: 'Build'
 
